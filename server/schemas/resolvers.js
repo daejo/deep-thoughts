@@ -1,6 +1,7 @@
 const { User, Thought } = require('../models');
 
 const resolvers = {
+  // INCHARGE OF "READ".
   Query: {
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -23,6 +24,17 @@ const resolvers = {
         .select('-__v -password')
         .populate('friends')
         .populate('thoughts');
+    }
+  },
+  // INCHARGE OF "CREATE, UPDATE, AND DELETE".
+  Mutation: {
+    addUser: async (parent, arg) => {
+      const user = await User.create(args);
+
+      return user;
+    },
+    login: async () => {
+
     }
   }
 };
